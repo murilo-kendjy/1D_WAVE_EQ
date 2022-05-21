@@ -1,0 +1,47 @@
+1    ! T, rope tension
+1    ! xr1, rope 1 length
+1    ! xr2, rope 2 length
+0.5  ! L, joint length
+1000   ! Nx, number of points in x
+0    ! t1, Tempo inicial
+10   ! t2, Tempo final
+950  ! Nt, number of points in t
+2   ! mtd, Method 1- Explicit, 2-Implicit (default)
+0   ! n, system case select
+0   ! nxi, boundary condition at u(0,t)
+0   ! nxf, boundary condition at u(L,t)
+0   ! nxt, initial condition u(x,t_1) (deformation)
+0   ! nxtt, initial condition du(x,t_1)/dt (velocity)
+
+! For Explicit method the verified working points is: Nx=100, Nt=950
+
+! system case select
+! n=0 (default), beta=0, mu1=mu2=mu3=1, F=0
+! n=1   beta=0, mu=1 < mu2=5, F=0
+! n=2   beta=0, mu1=5 < mu2=1, F=0
+! n=3   beta=0, mu1=1 mu2=(-4x+2.5)(4x+2.5) mu3=1, F=0 (L MUST BE > 0)
+! n=4   beta=0.5, mu1=1 mu2=1+5x**2 mu3=1, F=0 (L MUST BE > 0)
+! n=10  Custom, user defined (Check system.f95)
+
+! boundary condition at u(0,t)
+! nxi=0 (default), u(0,t)=0
+! nxi=1, u(1,t)=u(0,t)
+! nxi=10    Custom, user defined (Check boundary.f95)
+
+! boundary condition at u(L,t)
+! nxf=0 (default), u(L,t)=0
+! nxf=1, u(nx,t)=u(nx-1,t)
+! nxf=10    Custom, user defined (Check boundary.f95)
+
+! initial condition (deformation) u(x,t_1)
+! nxt=0 (default), u(0,t)=0
+! nxt=1, sin(x)
+! nxt=2, central triangular (recommended use with nxtt=1)
+! nxt=10    Custom, user defined (Check boundary.f95)
+
+! initial condition (velocity) du(x,t_1)/dt
+! nxtt=0 (default), sin(x) in 1/8 of the rope
+! nxtt=1, zero
+! nxtt=2 , sin(x) in 1/2 of the rope
+! nxtt=3 , sin(x) in 1/4 of the rope
+! nxtt=10    Custom, user defined (Check boundary.f95)
